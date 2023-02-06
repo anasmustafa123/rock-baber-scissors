@@ -19,15 +19,17 @@ function round(getHumanChoice,getComputerChoice){
         return 1;
     }
     else if(humanChoice == computerChoice){
-        return 0;
+        return 2;
     }
     else {
-        return  2;
+        return  0;
     }
 }
 function getHumanChoice(message){
     return String(prompt(message + " enter your choice 'rock','paper','scissor' "));
 }
+
+/*
 function game(){
     let plCount=0,compCount=0,drawCount=0;
     for (let i =0;i<5;i++){
@@ -35,7 +37,7 @@ function game(){
         if(whoWon == 1){
             plCount++;
         }
-        else if(whoWon == 2){
+        else if(whoWon == 0){
             compCount++;
         }
         else {
@@ -47,4 +49,47 @@ function game(){
     console.log("the winner is " +  winner  );
 }
 game();
+*/
+const paper = document.getElementById('paper');
+console.log(typeof paper.id);
+paper.addEventListener('click', (event) => {
+    const move = event.target;
+});
+
+
+const moves = document.querySelectorAll('.move');
+moves.forEach(move => {
+    move.addEventListener('click' , startGame);
+});
+
+var numOfGames =  0; 
+const maxNumberOfGames = 5;
+let plwins=0;
+let compwins=0;
+let draws=0;
+
+
+function startGame(event){
+    const humanChoice = event.target.id; 
+    var computerChoice = getComputerChoice();
+    if(numOfGames == maxNumberOfGames){ //finish the game
+        let winner =  (plwins>compwins )? "you " : ((compwins > plwins )? "the engine" : "noone its draw");
+        console.log("the winner is " +  winner  );
+    }else{ //continue the game
+        var roundResult  = round(humanChoice,computerChoice);
+        if(roundResult == 1){
+            plwins++;
+        }
+        else if(roundResult == 0){
+            compwins++;
+        }
+        else {
+            draws++;
+        }
+        console.log( `humanChoice "${humanChoice}", computerChoice "${computerChoice}" , "${roundResult}"`);
+        console.log(`"${numOfGames}"  : :: :   "${maxNumberOfGames}" `);
+        numOfGames++;
+    }
+    
+}
 
