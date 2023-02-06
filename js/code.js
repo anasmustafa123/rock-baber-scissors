@@ -25,38 +25,13 @@ function round(getHumanChoice,getComputerChoice){
         return  0;
     }
 }
-function getHumanChoice(message){
-    return String(prompt(message + " enter your choice 'rock','paper','scissor' "));
-}
-
-/*
-function game(){
-    let plCount=0,compCount=0,drawCount=0;
-    for (let i =0;i<5;i++){
-        let whoWon =round(getHumanChoice("round" + (i+1)),getComputerChoice());
-        if(whoWon == 1){
-            plCount++;
-        }
-        else if(whoWon == 0){
-            compCount++;
-        }
-        else {
-            drawCount++;
-        }
-        console.log("player won: "+ plCount+ ",  computer won: "+compCount + ",  draws: " + drawCount);
-    }
-    let winner =  (plCount>compCount )? "you " : ((compCount > plCount )? "the engine" : "noone its draw");
-    console.log("the winner is " +  winner  );
-}
-game();
-*/
-
-
 
 const moves = document.querySelectorAll('.move');
 moves.forEach(move => {
     move.addEventListener('click' , startGame);
-});
+    move.addEventListener("click" , isClicked);
+    move.addEventListener('transitionend', isTransitionFinished);
+});                        
 
 var numOfGames =  0; 
 const maxNumberOfGames = 5;
@@ -98,4 +73,11 @@ function startGame(event){
         console.log(`"${numOfGames}"  : :: :   "${maxNumberOfGames}" `);
         numOfGames++;
     }
+}
+function isClicked(){
+    this.classList.add('pushImg');
+}
+function isTransitionFinished(event){
+    if(event.propertyName != 'transform') return;
+    this.classList.remove('pushImg');
 }

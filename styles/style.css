@@ -3,7 +3,6 @@ body {
     margin: 0px;
     display: flex;
     height: 100vh;
-    justify-content: center;
     flex-direction: column;
 }
 .containersBackground{
@@ -15,19 +14,22 @@ body {
 }
 .itemsContainer {
     display: flex;
+    width: 500px;
     height: 150px;
     justify-content: space-between;
     align-items: center;
 }
-img{
+.itemsContainer img{
     height: 120px;
+    transition: all 0.06s;
 }
-
 
 .container{
     display: flex;
     height: 500px;
     justify-content: center;
+    align-items: center;
+    gap: 70px;
 }
 .roundResult,.message{
     margin: 15px;
@@ -37,7 +39,7 @@ img{
     display: flex;
     flex-direction: column;
     align-items: center;
-    justify-content: space-evenly;
+    gap: 40px;
 }
 .score{
     display: flex;
@@ -47,4 +49,13 @@ img{
     width: 150px;
     height: 30px;
 }
-
+.pushImg{
+    box-shadow: 5px 5px 12px 5px rgb(89, 128, 201);
+    transform: scale(1.1);
+    border: 1px solid  rgba(27, 36, 151, 0.89);
+    background: rgba(67, 101, 214, 0.281);
+}
+#humanMove,#aiMove{
+    width: 200px;
+    height: 200px;
+}
