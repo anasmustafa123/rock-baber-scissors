@@ -8,14 +8,14 @@ function getComputerChoice(){
         return 'paper';
     }
     else {
-        return 'scissor';
+        return 'scissors';
     }
 }
 function round(getHumanChoice,getComputerChoice){
 
     let humanChoice = getHumanChoice.toLowerCase();
     let computerChoice = getComputerChoice.toLowerCase()  ;
-    if((humanChoice == "rock"&& computerChoice == "scissor") || (humanChoice == "scissor" && computerChoice == "paper")  || (humanChoice == "paper" && computerChoice == "rock")){
+    if((humanChoice == "rock"&& computerChoice == "scissors") || (humanChoice == "scissors" && computerChoice == "paper")  || (humanChoice == "paper" && computerChoice == "rock")){
         return 1;
     }
     else if(humanChoice == computerChoice){
@@ -50,11 +50,7 @@ function game(){
 }
 game();
 */
-const paper = document.getElementById('paper');
-console.log(typeof paper.id);
-paper.addEventListener('click', (event) => {
-    const move = event.target;
-});
+
 
 
 const moves = document.querySelectorAll('.move');
@@ -66,30 +62,40 @@ var numOfGames =  0;
 const maxNumberOfGames = 5;
 let plwins=0;
 let compwins=0;
-let draws=0;
 
 
 function startGame(event){
-    const humanChoice = event.target.id; 
+    const humanChoice = this.id; 
     var computerChoice = getComputerChoice();
+    if(numOfGames>maxNumberOfGames) return;
     if(numOfGames == maxNumberOfGames){ //finish the game
-        let winner =  (plwins>compwins )? "you " : ((compwins > plwins )? "the engine" : "noone its draw");
+        const message = document.querySelector(".message");
+        const roundResult = document.querySelector(".roundResult");
+        let winner =  (plwins>compwins )? "you won" : ((compwins > plwins )? "you lost" : "its draw");
+        roundResult.textContent  = winner;
+        message.textContent = "";
         console.log("the winner is " +  winner  );
+        numOfGames++;
     }else{ //continue the game
         var roundResult  = round(humanChoice,computerChoice);
+        const message = document.querySelector(".message");
+        const humScore  = document.getElementById("humanScore");
+        const aiScore  = document.getElementById("aiScore");
         if(roundResult == 1){
             plwins++;
+            message.textContent = "keep going";
+            humScore.textContent = plwins.toString();
         }
         else if(roundResult == 0){
             compwins++;
+            message.textContent = "you lost this round";
+            aiScore.textContent = compwins.toString();
         }
         else {
-            draws++;
+            message.textContent = "draw";
         }
         console.log( `humanChoice "${humanChoice}", computerChoice "${computerChoice}" , "${roundResult}"`);
         console.log(`"${numOfGames}"  : :: :   "${maxNumberOfGames}" `);
         numOfGames++;
     }
-    
 }
-
