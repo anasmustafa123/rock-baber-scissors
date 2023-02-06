@@ -76,6 +76,9 @@ function startGame(event){
 }
 function isClicked(){
     this.classList.add('pushImg');
+    const audio = document.querySelector('.clickSound');
+    audio.currentTime = 0;
+    audio.play();
 }
 function isTransitionFinished(event){
     if(event.propertyName != 'transform') return;
