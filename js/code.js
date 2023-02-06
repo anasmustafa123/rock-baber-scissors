@@ -73,8 +73,6 @@ function startGame(event){
         }
         message.textContent = messageText;
         numOfGames++;
-        console.log( `humanChoice "${humanChoice}", computerChoice "${computerChoice}" , "${roundResult}"`);
-        console.log(`"${numOfGames}`);
     }
 }
 function isClicked(){
@@ -90,7 +88,14 @@ function isTransitionFinished(event){
 function newGame(event){
     numOfGames = 1;
     const roundResult = document.querySelector('.roundResult');
-    roundResult.textContent = "";
     const message  = document.querySelector('.message');
+    const humanScore = document.getElementById('humanScore');
+    const aiScore = document.getElementById('aiScore');
     message.textContent = "";
+    roundResult.textContent = "";
+    aiScore.textContent = '0';
+    humanScore.textContent = '0';
+    plwins = 0;
+    compwins = 0;
+    console.log(aiMove);
 }
