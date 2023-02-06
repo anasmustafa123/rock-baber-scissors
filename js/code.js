@@ -33,7 +33,7 @@ moves.forEach(move => {
     move.addEventListener('transitionend', isTransitionFinished);
 });                        
 
-var numOfGames =  0; 
+var numOfGames =  1; 
 const maxNumberOfGames = 5;
 let plwins=0;
 let compwins=0;
@@ -43,35 +43,38 @@ function startGame(event){
     const humanChoice = this.id; 
     var computerChoice = getComputerChoice();
     if(numOfGames>maxNumberOfGames) return;
-    if(numOfGames == maxNumberOfGames){ //finish the game
-        const message = document.querySelector(".message");
-        const roundResult = document.querySelector(".roundResult");
-        let winner =  (plwins>compwins )? "you won" : ((compwins > plwins )? "you lost" : "its draw");
-        roundResult.textContent  = winner;
-        message.textContent = "";
-        console.log("the winner is " +  winner  );
-        numOfGames++;
-    }else{ //continue the game
+    else{ //continue the game
         var roundResult  = round(humanChoice,computerChoice);
         const message = document.querySelector(".message");
         const humScore  = document.getElementById("humanScore");
         const aiScore  = document.getElementById("aiScore");
+        let messageText = "";
         if(roundResult == 1){
             plwins++;
-            message.textContent = "keep going";
+            messageText = "keep going";
             humScore.textContent = plwins.toString();
         }
         else if(roundResult == 0){
             compwins++;
-            message.textContent = "you lost this round";
+            messageText = "you lost this round";
             aiScore.textContent = compwins.toString();
         }
         else {
-            message.textContent = "draw";
+            messageText = "draw";
         }
-        console.log( `humanChoice "${humanChoice}", computerChoice "${computerChoice}" , "${roundResult}"`);
-        console.log(`"${numOfGames}"  : :: :   "${maxNumberOfGames}" `);
+        if(numOfGames == maxNumberOfGames){ //finish the game
+            const roundResult = document.querySelector(".roundResult");
+            let winner =  (plwins>compwins )? "you won" : ((compwins > plwins )? "you lost" : "its draw");
+            roundResult.textContent  = winner;
+            console.log("the winner is " +  winner  );
+            numOfGames++;
+            messageText = "play again";
+            message.addEventListener('click', newGame);
+        }
+        message.textContent = messageText;
         numOfGames++;
+        console.log( `humanChoice "${humanChoice}", computerChoice "${computerChoice}" , "${roundResult}"`);
+        console.log(`"${numOfGames}`);
     }
 }
 function isClicked(){
@@ -83,4 +86,11 @@ function isClicked(){
 function isTransitionFinished(event){
     if(event.propertyName != 'transform') return;
     this.classList.remove('pushImg');
+}
+function newGame(event){
+    numOfGames = 1;
+    const roundResult = document.querySelector('.roundResult');
+    roundResult.textContent = "";
+    const message  = document.querySelector('.message');
+    message.textContent = "";
 }
