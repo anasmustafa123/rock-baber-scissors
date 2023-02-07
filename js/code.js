@@ -48,6 +48,10 @@ function startGame(event){
         const message = document.querySelector(".message");
         const humScore  = document.getElementById("humanScore");
         const aiScore  = document.getElementById("aiScore");
+        const humanMove = document.querySelector('#humanMove');
+        const aiMove    = document.querySelector("#aiMove");
+        aiMove.src =  "./imgs/"+computerChoice+".png";
+        humanMove.src = "./imgs/"+humanChoice + ".png";
         let messageText = "";
         if(roundResult == 1){
             plwins++;
@@ -66,7 +70,6 @@ function startGame(event){
             const roundResult = document.querySelector(".roundResult");
             let winner =  (plwins>compwins )? "you won" : ((compwins > plwins )? "you lost" : "its draw");
             roundResult.textContent  = winner;
-            console.log("the winner is " +  winner  );
             numOfGames++;
             messageText = "play again";
             message.addEventListener('click', newGame);
@@ -91,11 +94,14 @@ function newGame(event){
     const message  = document.querySelector('.message');
     const humanScore = document.getElementById('humanScore');
     const aiScore = document.getElementById('aiScore');
+    const humanPic = document.querySelector('#humanMove');
+    const aiPic = document.querySelector('#aiMove');
     message.textContent = "";
     roundResult.textContent = "";
     aiScore.textContent = '0';
     humanScore.textContent = '0';
     plwins = 0;
     compwins = 0;
-    console.log(aiMove);
+    aiPic.src = "./imgs/ai.png";
+    humanPic.src = "./imgs/gamer.png";
 }
