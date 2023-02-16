@@ -1,6 +1,8 @@
  rock-baber-scissors
 simple rock paper scissors game implementaion
 
+wepsite ad: <a href = "https://anasmustafa123.github.io/rock-baber-scissors/" >rock-paper-scissors</a>
+
 
 
 
